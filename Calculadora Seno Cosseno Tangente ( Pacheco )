@@ -1,35 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Calculadora Trigonométrica</title>
-</head>
-<body>
-    <h1>Calculadora Trigonométrica</h1>
-    <form method="post">
-        <label for="angulo">Ângulo (em graus):</label>
-        <input type="text" name="angulo" id="angulo"><br><br>
-        
-        <input type="submit" name="seno" value="Seno">
-        <input type="submit" name="cosseno" value="Cosseno">
-        <input type="submit" name="tangente" value="Tangente">
+  <head>
+    <title>Calculadora PHP com AJAX</title>
+    <style>
+      /* Estilos para os botões */
+      button {
+        font-size: 20px;
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+      }
+      
+      /* Estilos para a tela de exibição */
+      #display {
+        font-size: 30px;
+        width: 200px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Função para enviar o formulário via AJAX
+        $("form").submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: "calc.php",
+            data: $(this).serialize(),
+            success: function(response) {
+              $("#result").html(response);
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Formulário para a calculadora -->
+    <form>
+      <input type="text" name="num1" id="num1" />
+      <input type="text" name="num2" id="num2" />
+      <br />
+      <button type="button" name="operator" value="+" onclick="sendForm('+')">+</button>
+      <button type="button" name="operator" value="-" onclick="sendForm('-')">-</button>
+      <button type="button" name="operator" value="*" onclick="sendForm('*')">*</button>
+      <button type="button" name="operator" value="/" onclick="sendForm('/')">/</button>
+      <button type="button" name="operator" value="√" onclick="sendForm('√')">√</button>
+      <button type="button" name="operator" value="^" onclick="sendForm('^')">^</button>
+      <button type="button" name="operator" value="sen" onclick="sendForm('sen')">sen</button>
+      <button type="button" name="operator" value="cos" onclick="sendForm('cos')">cos</button>
+      <button type="button" name="operator" value="tan" onclick="sendForm('tan')">tan</button>
     </form>
     
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") { // verifica se o formulário foi enviado
-        $angulo = $_POST["angulo"]; // obtém o ângulo do input de texto
-        
-        if (isset($_POST["seno"])) { // verifica qual botão foi clicado
-            $resultado = sin(deg2rad($angulo)); // calcula o seno
-            echo "<p>O seno de $angulo graus é: $resultado</p>";
-        } elseif (isset($_POST["cosseno"])) {
-            $resultado = cos(deg2rad($angulo)); // calcula o cosseno
-            echo "<p>O cosseno de $angulo graus é: $resultado</p>";
-        } elseif (isset($_POST["tangente"])) {
-            $resultado = tan(deg2rad($angulo)); // calcula a tangente
-            echo "<p>A tangente de $angulo graus é: $resultado</p>";
-        }
-    }
-    ?>
-</body>
+    <!-- Tela de exibição do resultado -->
+    <div id="result"></div>
+    
+    <script>
+      function sendForm(operator) {
+        // Adiciona o operador ao formulário antes de enviá-lo via AJAX
+        $("#operator").val(operator);
+        $("form").submit();
+      }
+    </script>
+  </body>
 </html>
