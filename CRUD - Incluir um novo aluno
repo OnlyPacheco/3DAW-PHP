@@ -1,0 +1,47 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $alunos = [];
+    $novo_aluno = [
+        'matricula' => $_POST['matricula'],
+        'sigla_materia' => $_POST['sigla_materia'],
+        'carga_horaria' => $_POST['carga_horaria'],
+        'data_ingresso' => $_POST['data_ingresso'],
+        'cpf' => $_POST['cpf']
+    ];
+
+    if (file_exists('alunos.txt')) {
+        $alunos = unserialize(file_get_contents('alunos.txt'));
+    }
+
+    $alunos[] = $novo_aluno;
+
+    file_put_contents('alunos.txt', serialize($alunos));
+}
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Incluir Aluno</title>
+</head>
+
+<body>
+    <h1>Incluir Aluno</h1>
+    <form method="post">
+        <label>Matrícula:</label><br>
+        <input type="text" name="matricula"><br>
+        <label>Sigla da Matéria:</label><br>
+        <input type="text" name="sigla_materia"><br>
+        <label>Carga Horária:</label><br>
+        <input type="text" name="carga_horaria"><br>
+        <label>Data de Ingresso:</label><br>
+        <input type="text" name="data_ingresso"><br>
+        <label>CPF:</label><br>
+        <input type="text" name="cpf"><br><br>
+        <input type="submit" value="Salvar">
+    </form>
+    <br>
+    <a href="index.html">Voltar</a>
+</body>
+
+</html>
