@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Alunos</title>
+</head>
+<body>
+    <h1>Listar Aluno</h1>
+    <form method="get">
+        <label>Matrícula:</label><br>
+        <input type="text" name="matricula"><br><br>
+        <input type="submit" value="Buscar">
+    </form>
+    <br>
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $matricula = $_GET['matricula'];
+            $encontrouAluno = false;
+            if (file_exists('alunos.txt')) {
+                $alunos = unserialize(file_get_contents('alunos.txt'));
+                echo '<table border="1">';
+                echo '<tr><th>Matrícula</th><th>Sigla da Matéria</th><th>Carga Horária</th><th>Data de Ingresso</th><th>CPF</th></tr>';
+                foreach ($alunos as $aluno) {
+                    if ($aluno['matricula'] == $matricula) {
+                        $encontrouAluno = true;
+                        echo '<tr>';
+                        echo '<td>' . $aluno['matricula'] . '</td>';
+                        echo '<td>' . $aluno['sigla_materia'] . '</td>';
+                        echo '<td>' . $aluno['carga_horaria'] . '</td>';
+                        echo '<td>' . $aluno['data_ingresso'] . '</td>';
+                        echo '<td>' . $aluno['cpf'] . '</td>';
+                        echo '</tr>';
+                    }
+                }
+                echo '</table>';
+                if (!$encontrouAluno) {
+                    echo '<p>Nenhum aluno encontrado com a matrícula informada.</p>';
+                }
+            } else {
+                echo '<p>Arquivo de alunos não encontrado!</p>';
+            }
+        }
+    ?>
+    <br>
+    <a href="index.html">Voltar</a>
+</body>
+</html>
