@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <h1>Alterar Aluno</h1>
     <form method="post">
-        <label>Insira a Matrícula do aluno que você deseja alterar:</label><br><br>
+        <label>Insira abaixo a Matrícula do aluno que você deseja alterar:</label><br><br>
         <input type="text" name="matricula"><br>
         <label>Sigla da Matéria:</label><br>
         <input type="text" name="sigla_materia"><br>
