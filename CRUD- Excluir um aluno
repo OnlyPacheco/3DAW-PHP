@@ -1,0 +1,38 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $matricula = $_POST['matricula'];
+
+    $alunos = [];
+    if (file_exists('alunos.txt')) {
+        $alunos = unserialize(file_get_contents('alunos.txt'));
+    }
+
+    foreach ($alunos as $key => $aluno) {
+        if ($aluno['matricula'] == $matricula) {
+            unset($alunos[$key]);
+            break;
+        }
+    }
+
+    file_put_contents('alunos.txt', serialize($alunos));
+}
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Excluir Aluno</title>
+</head>
+
+<body>
+    <h1>Excluir Aluno</h1>
+    <form method="post">
+        <label>Matrícula:</label><br>
+        <input type="text" name="matricula"><br><br>
+        <input type="submit" value="Excluir">
+    </form>
+    <br>
+    <a href="index.php">Voltar</a>
+</body>
+
+</html>
