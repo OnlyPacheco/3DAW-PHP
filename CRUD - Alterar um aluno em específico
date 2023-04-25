@@ -1,0 +1,61 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $matricula = $_POST['matricula'];
+    $alunos = [];
+
+    if (file_exists('alunos.txt')) {
+        $alunos = unserialize(file_get_contents('alunos.txt'));
+    }
+
+    $aluno_index = null;
+    foreach ($alunos as $index => $aluno) {
+        if ($aluno['matricula'] == $matricula) {
+            $aluno_index = $index;
+            break;
+        }
+    }
+
+    if ($aluno_index !== null) {
+        $alunos[$aluno_index]['sigla_materia'] = $_POST['sigla_materia'];
+        $alunos[$aluno_index]['carga_horaria'] = $_POST['carga_horaria'];
+        $alunos[$aluno_index]['data_ingresso'] = $_POST['data_ingresso'];
+        $alunos[$aluno_index]['cpf'] = $_POST['cpf'];
+
+        file_put_contents('alunos.txt', serialize($alunos));
+
+        echo "Aluno alterado com sucesso!";
+    } else {
+        echo "Aluno não encontrado.";
+    }
+} else {
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Alterar Aluno</title>
+</head>
+
+<body>
+    <h1>Alterar Aluno</h1>
+    <form method="post">
+        <label>Insira a Matrícula do aluno que você deseja alterar:</label><br><br>
+        <input type="text" name="matricula"><br>
+        <label>Sigla da Matéria:</label><br>
+        <input type="text" name="sigla_materia"><br>
+        <label>Carga Horária:</label><br>
+        <input type="text" name="carga_horaria"><br>
+        <label>Data de Ingresso:</label><br>
+        <input type="text" name="data_ingresso"><br>
+        <label>CPF:</label><br>
+        <input type="text" name="cpf"><br><br>
+        <input type="submit" value="Alterar">
+    </form>
+    <br>
+    <a href="index.html">Voltar</a>
+</body>
+
+</html>
+<?php
+}
+?>
