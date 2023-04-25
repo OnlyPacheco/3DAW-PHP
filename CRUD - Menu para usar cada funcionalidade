@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu</h1>
+    <ul>
+        <li><a href="incluir.php">Incluir Novo Aluno</a></li>
+        <li><a href="listarAluno.php">Listar Aluno Escolhido </a></li>
+        <li><a href="alterar.php">Alterar Aluno</a></li>
+        <li><a href="excluir.php">Excluir Aluno</a></li>
+        <li><a href="listarAlunos.php">Listar todos os alunos</a></li>
+    </ul>
+</body>
+</html>
