@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Excluir">
     </form>
     <br>
-    <a href="index.php">Voltar</a>
+    <a href="index.html">Voltar</a>
 </body>
 
 </html>
