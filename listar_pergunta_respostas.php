@@ -33,7 +33,7 @@
                 $opcoes = array_slice($perguntas, $indice + 1, 4);
                 $respostaCorreta = $perguntas[$indice + 5];
 
-                echo "<h3>Pergunta: $pergunta</h3>";
+                echo "<h3>Pergunta de Múltipla Escolha : $pergunta</h3>";
                 echo "<ul>";
                 foreach ($opcoes as $opcao) {
                     echo "<li>$opcao</li>";
@@ -53,7 +53,7 @@
                 $pergunta = $perguntas[$indice];
                 $resposta = $perguntas[$indice + 1];
 
-                echo "<h3>Pergunta: $pergunta</h3>";
+                echo "<h3>Pergunta de Texto: $pergunta</h3>";
                 echo "<p>Resposta: $resposta</p>";
             } else {
                 echo "Número de pergunta inválido!";
