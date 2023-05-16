@@ -16,7 +16,7 @@
         $opcoes = array_slice($perguntas, $i + 1, 4);
         $respostaCorreta = $perguntas[$i + 5];
 
-        echo "<h3>Pergunta: $pergunta</h3>";
+        echo "<h3>Perguntas Múltipla Escolha: $pergunta</h3>";
         echo "<ul>";
         foreach ($opcoes as $opcao) {
             echo "<li>$opcao</li>";
@@ -34,7 +34,7 @@
         $pergunta = $perguntasTexto[$i];
         $resposta = $perguntasTexto[$i + 1];
 
-        echo "<h3>Pergunta: $pergunta</h3>";
+        echo "<h3>Perguntas Texto: $pergunta</h3>";
         echo "<p>Resposta: $resposta</p>";
         echo "<hr>";
     }
