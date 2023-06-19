@@ -55,35 +55,49 @@ function criarPerguntaTexto($pergunta) {
     $conn->close();
 }
 
-// Função para alterar uma pergunta de múltipla escolha no banco de dados
 function alterarPerguntaMultiplaEscolha($id, $pergunta, $opcoes) {
-    $conn = conectarBancoDados();
+          $conn = conectarBancoDados();
 
-    $sql = "UPDATE perguntas SET pergunta='$pergunta', opcoes='$opcoes' WHERE id=$id";
+          $sql = "UPDATE perguntas SET pergunta='$pergunta', opcoes='$opcoes' WHERE id=$id";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Pergunta de múltipla escolha alterada com sucesso.";
-    } else {
-        echo "Erro ao alterar a pergunta de múltipla escolha: " . $conn->error;
-    }
+          if ($conn->query($sql) === TRUE) {
+              echo "Pergunta de múltipla escolha alterada com sucesso.";
+          } else {
+              echo "Erro ao alterar a pergunta de múltipla escolha: " . $conn->error;
+          }
 
-    $conn->close();
-}
+          $conn->close();
+      }
 
-// Função para alterar uma pergunta de texto no banco de dados
-function alterarPerguntaTexto($id, $pergunta) {
-    $conn = conectarBancoDados();
+      // Função para alterar as respostas de uma pergunta de múltipla escolha no banco de dados
+      function alterarRespostasMultiplaEscolha($id, $opcoes) {
+          $conn = conectarBancoDados();
 
-    $sql = "UPDATE perguntas SET pergunta='$pergunta' WHERE id=$id";
+          $sql = "UPDATE perguntas SET opcoes='$opcoes' WHERE id=$id";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Pergunta de texto alterada com sucesso.";
-    } else {
-        echo "Erro ao alterar a pergunta de texto: " . $conn->error;
-    }
+          if ($conn->query($sql) === TRUE) {
+              echo "Respostas da pergunta de múltipla escolha alteradas com sucesso.";
+          } else {
+              echo "Erro ao alterar as respostas da pergunta de múltipla escolha: " . $conn->error;
+          }
 
-    $conn->close();
-}
+          $conn->close();
+      }
+
+      // Função para alterar uma pergunta de texto no banco de dados
+      function alterarPerguntaTexto($id, $pergunta) {
+          $conn = conectarBancoDados();
+
+          $sql = "UPDATE perguntas SET pergunta='$pergunta' WHERE id=$id";
+
+          if ($conn->query($sql) === TRUE) {
+              echo "Pergunta de texto alterada com sucesso.";
+          } else {
+              echo "Erro ao alterar a pergunta de texto: " . $conn->error;
+          }
+
+          $conn->close();
+      }
 
 // Função para listar todas as perguntas e respostas do banco de dados
 function listarPerguntasRespostas() {

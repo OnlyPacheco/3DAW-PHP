@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu de Funções</title>
+</head>
+<body>
+    <h1>Menu de Funções</h1>
+
+    <h2>Criar Pergunta de Múltipla Escolha</h2>
+    <form action="processar.php" method="post">
+        <label for="perguntaMultipla">Pergunta:</label>
+        <input type="text" name="perguntaMultipla" id="perguntaMultipla" required>
+
+        <label for="opcoes">Opções (separadas por vírgula):</label>
+        <input type="text" name="opcoes" id="opcoes" required>
+
+        <input type="hidden" name="acao" value="criarPerguntaMultiplaEscolha">
+        <input type="submit" value="Criar Pergunta">
+    </form>
+
+    <h2>Criar Pergunta de Texto</h2>
+    <form action="processar.php" method="post">
+        <label for="perguntaTexto">Pergunta:</label>
+        <input type="text" name="perguntaTexto" id="perguntaTexto" required>
+
+        <input type="hidden" name="acao" value="criarPerguntaTexto">
+        <input type="submit" value="Criar Pergunta">
+    </form>
+
+    <h2>Listar Perguntas e Respostas</h2>
+    <form action="processar.php" method="post">
+        <input type="hidden" name="acao" value="listarPerguntasRespostas">
+        <input type="submit" value="Listar">
+    </form>
+
+    <h2>Listar uma Pergunta</h2>
+    <form action="processar.php" method="post">
+        <label for="idPergunta">ID da Pergunta:</label>
+        <input type="number" name="idPergunta" id="idPergunta" required>
+
+        <input type="hidden" name="acao" value="listarPergunta">
+        <input type="submit" value="Listar">
+    </form>
+
+    <h2>Excluir Pergunta e Respostas</h2>
+    <form action="processar.php" method="post">
+        <label for="idPerguntaExcluir">ID da Pergunta:</label>
+        <input type="number" name="idPerguntaExcluir" id="idPerguntaExcluir" required>
+
+        <input type="hidden" name="acao" value="excluirPerguntaRespostas">
+        <input type="submit" value="Excluir">
+    </form>
+
+  <h2>Alterar Pergunta de Múltipla Escolha</h2>
+    <form action="processar.php" method="post">
+      <label for="idPerguntaAlterarMultipla">ID da Pergunta:</label>
+      <input type="number" name="idPerguntaAlterarMultipla" id="idPerguntaAlterarMultipla" required>
+
+      <label for="novaPerguntaMultipla">Nova Pergunta:</label>
+      <input type="text" name="novaPerguntaMultipla" id="novaPerguntaMultipla" required>
+
+      <label for="novasRespostasMultipla">Novas Respostas (separadas por vírgula):</label>
+      <input type="text" name="novasRespostasMultipla" id="novasRespostasMultipla">
+
+      <input type="hidden" name="acao" value="alterarPerguntaMultipla">
+      <input type="submit" value="Alterar">
+    </form>
+
+    <h2>Alterar Respostas de Pergunta de Múltipla Escolha</h2>
+    <form action="processar.php" method="post">
+      <label for="idPerguntaAlterarRespostas">ID da Pergunta:</label>
+      <input type="number" name="idPerguntaAlterarRespostas" id="idPerguntaAlterarRespostas" required>
+
+      <label for="novasRespostasAlterar">Novas Respostas (separadas por vírgula):</label>
+      <input type="text" name="novasRespostasAlterar" id="novasRespostasAlterar" required>
+
+      <input type="hidden" name="acao" value="alterarRespostasMultipla">
+      <input type="submit" value="Alterar">
+    </form>
+
+    <h2>Alterar Pergunta de Texto</h2>
+    <form action="processar.php" method="post">
+      <label for="idPerguntaAlterarTexto">ID da Pergunta:</label>
+      <input type="number" name="idPerguntaAlterarTexto" id="idPerguntaAlterarTexto" required>
+
+      <label for="novaPerguntaTexto">Nova Pergunta:</label>
+      <input type="text" name="novaPerguntaTexto" id="novaPerguntaTexto" required>
+
+      <input type="hidden" name="acao" value="alterarPerguntaTexto">
+      <input type="submit" value="Alterar">
+    </form>
+  
+</body>
+</html>
