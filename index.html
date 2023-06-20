@@ -7,88 +7,194 @@
     <h1>Menu de Funções</h1>
 
     <h2>Criar Pergunta de Múltipla Escolha</h2>
-    <form action="processar.php" method="post">
+    <form id="formCriarPerguntaMultipla">
         <label for="perguntaMultipla">Pergunta:</label>
         <input type="text" name="perguntaMultipla" id="perguntaMultipla" required>
 
         <label for="opcoes">Opções (separadas por vírgula):</label>
         <input type="text" name="opcoes" id="opcoes" required>
 
-        <input type="hidden" name="acao" value="criarPerguntaMultiplaEscolha">
         <input type="submit" value="Criar Pergunta">
     </form>
 
     <h2>Criar Pergunta de Texto</h2>
-    <form action="processar.php" method="post">
+    <form id="formCriarPerguntaTexto">
         <label for="perguntaTexto">Pergunta:</label>
         <input type="text" name="perguntaTexto" id="perguntaTexto" required>
 
-        <input type="hidden" name="acao" value="criarPerguntaTexto">
         <input type="submit" value="Criar Pergunta">
     </form>
 
     <h2>Listar Perguntas e Respostas</h2>
-    <form action="processar.php" method="post">
-        <input type="hidden" name="acao" value="listarPerguntasRespostas">
-        <input type="submit" value="Listar">
-    </form>
+    <button id="btnListarPerguntasRespostas">Listar</button>
 
     <h2>Listar uma Pergunta</h2>
-    <form action="processar.php" method="post">
+    <form id="formListarPergunta">
         <label for="idPergunta">ID da Pergunta:</label>
         <input type="number" name="idPergunta" id="idPergunta" required>
 
-        <input type="hidden" name="acao" value="listarPergunta">
         <input type="submit" value="Listar">
     </form>
 
     <h2>Excluir Pergunta e Respostas</h2>
-    <form action="processar.php" method="post">
+    <form id="formExcluirPerguntaRespostas">
         <label for="idPerguntaExcluir">ID da Pergunta:</label>
         <input type="number" name="idPerguntaExcluir" id="idPerguntaExcluir" required>
 
-        <input type="hidden" name="acao" value="excluirPerguntaRespostas">
         <input type="submit" value="Excluir">
     </form>
 
-  <h2>Alterar Pergunta de Múltipla Escolha</h2>
-    <form action="processar.php" method="post">
-      <label for="idPerguntaAlterarMultipla">ID da Pergunta:</label>
-      <input type="number" name="idPerguntaAlterarMultipla" id="idPerguntaAlterarMultipla" required>
+    <h2>Alterar Pergunta de Múltipla Escolha</h2>
+    <form id="formAlterarPerguntaMultipla">
+        <label for="idPerguntaAlterarMultipla">ID da Pergunta:</label>
+        <input type="number" name="idPerguntaAlterarMultipla" id="idPerguntaAlterarMultipla" required>
 
-      <label for="novaPerguntaMultipla">Nova Pergunta:</label>
-      <input type="text" name="novaPerguntaMultipla" id="novaPerguntaMultipla" required>
+        <label for="novaPerguntaMultipla">Nova Pergunta:</label>
+        <input type="text" name="novaPerguntaMultipla" id="novaPerguntaMultipla" required>
 
-      <label for="novasRespostasMultipla">Novas Respostas (separadas por vírgula):</label>
-      <input type="text" name="novasRespostasMultipla" id="novasRespostasMultipla">
+        <label for="novasRespostasMultipla">Novas Respostas (separadas por vírgula):</label>
+        <input type="text" name="novasRespostasMultipla" id="novasRespostasMultipla">
 
-      <input type="hidden" name="acao" value="alterarPerguntaMultipla">
-      <input type="submit" value="Alterar">
+        <input type="submit" value="Alterar">
     </form>
 
     <h2>Alterar Respostas de Pergunta de Múltipla Escolha</h2>
-    <form action="processar.php" method="post">
-      <label for="idPerguntaAlterarRespostas">ID da Pergunta:</label>
-      <input type="number" name="idPerguntaAlterarRespostas" id="idPerguntaAlterarRespostas" required>
+    <form id="formAlterarRespostasMultipla">
+        <label for="idPerguntaAlterarRespostas">ID da Pergunta:</label>
+        <input type="number" name="idPerguntaAlterarRespostas" id="idPerguntaAlterarRespostas" required>
 
-      <label for="novasRespostasAlterar">Novas Respostas (separadas por vírgula):</label>
-      <input type="text" name="novasRespostasAlterar" id="novasRespostasAlterar" required>
+        <label for="novasRespostasMultipla">Novas Respostas (separadas por vírgula):</label>
+        <input type="text" name="novasRespostasMultipla" id="novasRespostasMultipla" required>
 
-      <input type="hidden" name="acao" value="alterarRespostasMultipla">
-      <input type="submit" value="Alterar">
+        <input type="submit" value="Alterar">
     </form>
 
-    <h2>Alterar Pergunta de Texto</h2>
-    <form action="processar.php" method="post">
-      <label for="idPerguntaAlterarTexto">ID da Pergunta:</label>
-      <input type="number" name="idPerguntaAlterarTexto" id="idPerguntaAlterarTexto" required>
+    <script>
+        // Função para enviar uma requisição usando o Fetch API
+        function enviarRequisicao(url, metodo, dados) {
+            return fetch(url, {
+                method: metodo,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            })
+            .then(response => response.json())
+            .catch(error => console.error('Erro:', error));
+        }
 
-      <label for="novaPerguntaTexto">Nova Pergunta:</label>
-      <input type="text" name="novaPerguntaTexto" id="novaPerguntaTexto" required>
+        // Função para criar uma pergunta de múltipla escolha
+        function criarPerguntaMultipla(event) {
+            event.preventDefault();
 
-      <input type="hidden" name="acao" value="alterarPerguntaTexto">
-      <input type="submit" value="Alterar">
-    </form>
-  
+            const form = document.getElementById('formCriarPerguntaMultipla');
+            const perguntaMultipla = form.elements['perguntaMultipla'].value;
+            const opcoes = form.elements['opcoes'].value.split(',');
+
+            const dados = {
+                pergunta: perguntaMultipla,
+                opcoes: opcoes
+            };
+
+            enviarRequisicao('criar_pergunta_multipla.php', 'POST', dados)
+                .then(response => console.log(response));
+        }
+
+        // Função para criar uma pergunta de texto
+        function criarPerguntaTexto(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('formCriarPerguntaTexto');
+            const perguntaTexto = form.elements['perguntaTexto'].value;
+
+            const dados = {
+                pergunta: perguntaTexto
+            };
+
+            enviarRequisicao('criar_pergunta_texto.php', 'POST', dados)
+                .then(response => console.log(response));
+        }
+
+        // Função para listar todas as perguntas e respostas
+        function listarPerguntasRespostas() {
+            enviarRequisicao('listar_perguntas_respostas.php', 'GET', {})
+                .then(response => console.log(response));
+        }
+
+        // Função para listar uma pergunta específica
+        function listarPergunta(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('formListarPergunta');
+            const idPergunta = form.elements['idPergunta'].value;
+
+            const dados = {
+                idPergunta: idPergunta
+            };
+
+            enviarRequisicao('listar_pergunta.php', 'POST', dados)
+                .then(response => console.log(response));
+        }
+
+        // Função para excluir uma pergunta e suas respostas
+        function excluirPerguntaRespostas(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('formExcluirPerguntaRespostas');
+            const idPerguntaExcluir = form.elements['idPerguntaExcluir'].value;
+
+            const dados = {
+                idPergunta: idPerguntaExcluir
+            };
+
+            enviarRequisicao('excluir_pergunta_respostas.php', 'POST', dados)
+                .then(response => console.log(response));
+        }
+
+        // Função para alterar uma pergunta de múltipla escolha
+        function alterarPerguntaMultipla(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('formAlterarPerguntaMultipla');
+            const idPerguntaAlterarMultipla = form.elements['idPerguntaAlterarMultipla'].value;
+            const novaPerguntaMultipla = form.elements['novaPerguntaMultipla'].value;
+            const novasRespostasMultipla = form.elements['novasRespostasMultipla'].value.split(',');
+
+            const dados = {
+                idPergunta: idPerguntaAlterarMultipla,
+                pergunta: novaPerguntaMultipla,
+                respostas: novasRespostasMultipla
+            };
+
+            enviarRequisicao('alterar_pergunta_multipla.php', 'POST', dados)
+                .then(response => console.log(response));
+        }
+
+        // Função para alterar as respostas de uma pergunta de múltipla escolha
+        function alterarRespostasMultipla(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('formAlterarRespostasMultipla');
+            const idPerguntaAlterarRespostas = form.elements['idPerguntaAlterarRespostas'].value;
+            const novasRespostasMultipla = form.elements['novasRespostasMultipla'].value.split(',');
+
+            const dados = {
+                idPergunta: idPerguntaAlterarRespostas,
+                respostas: novasRespostasMultipla
+            };
+
+            enviarRequisicao('alterar_respostas_multipla.php', 'POST', dados)
+                .then(response => console.log(response));
+        }
+
+        // Eventos de escuta para as requisições
+        document.getElementById('formCriarPerguntaMultipla').addEventListener('submit', criarPerguntaMultipla);
+        document.getElementById('formCriarPerguntaTexto').addEventListener('submit', criarPerguntaTexto);
+        document.getElementById('btnListarPerguntasRespostas').addEventListener('click', listarPerguntasRespostas);
+        document.getElementById('formListarPergunta').addEventListener('submit', listarPergunta);
+        document.getElementById('formExcluirPerguntaRespostas').addEventListener('submit', excluirPerguntaRespostas);
+        document.getElementById('formAlterarPerguntaMultipla').addEventListener('submit', alterarPerguntaMultipla);
+        document.getElementById('formAlterarRespostasMultipla').addEventListener('submit', alterarRespostasMultipla);
+    </script>
 </body>
 </html>
