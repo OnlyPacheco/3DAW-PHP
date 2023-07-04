@@ -10,7 +10,7 @@ if ($conn->connect_error) {
   die('Erro na conexão com o banco de dados , meu cria: ' . $conn->connect_error);
 }
 
-$sql = 'SELECT * FROM candidatos ORDER BY sala_prova, nome';
+$sql = 'SELECT * FROM candidatos ORDER BY salaprova, nome';
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
     echo 'Identidade: ' . $row['identidade'] . '<br>';
     echo 'Email: ' . $row['email'] . '<br>';
     echo 'Cargo Que procura: ' . $row['cargo_pretendido'] . '<br>';
-    echo 'Sala de Prova: ' . $row['sala_prova'] . '<br><br>';
+    echo 'Sala de Prova: ' . $row['salaprova'] . '<br><br>';
   }
 } else {
   echo 'Nenhum candidato encontrado , menó.';
