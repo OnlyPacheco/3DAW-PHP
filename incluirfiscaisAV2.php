@@ -14,7 +14,7 @@ $sala = $_POST['sala'];
 $fiscal1 = $_POST['fiscal1'];
 $fiscal2 = $_POST['fiscal2'];
 
-$sql = "UPDATE candidatos SET fiscal_1 = '$fiscal1', fiscal_2 = '$fiscal2' WHERE sala_prova = $sala";
+$sql = "UPDATE candidatos SET fiscal_1 = '$fiscal1', fiscal_2 = '$fiscal2' WHERE salaprova = $sala";
 
 if ($conn->query($sql) === TRUE) {
   echo 'Fiscais incluídos com sucesso , aproveite.';
