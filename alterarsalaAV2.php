@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $cpf = $_POST['cpf'];
 $novaSala = $_POST['novaSala'];
 
-$sql = "UPDATE candidatos SET sala_prova = $novaSala WHERE cpf = '$cpf'";
+$sql = "UPDATE candidatos SET salaprova = $novaSala WHERE cpf = '$cpf'";
 
 if ($conn->query($sql) === TRUE) {
   echo 'Sala de prova alterada com sucesso , menó.';
